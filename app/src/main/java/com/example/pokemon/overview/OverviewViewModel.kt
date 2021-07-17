@@ -19,7 +19,7 @@ enum class PokemonApiStatus { LOADING, ERROR, DONE }
 
 class OverviewViewModel : ViewModel() {
     private val offset = 0
-    private val limit = 20
+    private val limit = 40
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
@@ -28,13 +28,17 @@ class OverviewViewModel : ViewModel() {
     val response: LiveData<String>
         get() = _response
 
-    private val _status = MutableLiveData<String>()
-    val status: LiveData<String>
+    private val _status = MutableLiveData<PokemonApiStatus>()
+    val status: LiveData<PokemonApiStatus>
         get() = _status
 
-    private val _property = MutableLiveData<PokemonProperty>()
-    val property: LiveData<PokemonProperty>
+    private val _property = MutableLiveData<List<PokemonProperty>>()
+    val property: LiveData<List<PokemonProperty>>
         get() = _property
+
+    private val _properties = MutableLiveData<List<PokemonProperty>>()
+    val properties: LiveData<List<PokemonProperty>>
+        get() = _properties
 
     init {
         getPokemonProperties()
@@ -45,10 +49,16 @@ class OverviewViewModel : ViewModel() {
             var resultDeferred = PokemonApi.retrofitService.getPokemons(offset, limit)
 
             try {
-                var listResult = resultDeferred.await()
-               _response.value = "Success: ${listResult.results.size} Mars properties retrieved"
+                _status.value = PokemonApiStatus.LOADING
+                val listResult = resultDeferred.await().results
+                _status.value = PokemonApiStatus.DONE
+                if (listResult.isNotEmpty()) {
+                    _properties.value = listResult
+                }
+               _response.value = "Success: ${listResult.size} Mars properties retrieved"
             } catch (e: Exception) {
-                _response.value = "Failure: ${e.message}"
+                _status.value = PokemonApiStatus.ERROR
+                _properties.value = ArrayList()
             }
         }
     }

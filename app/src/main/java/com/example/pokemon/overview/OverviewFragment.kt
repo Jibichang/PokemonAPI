@@ -5,6 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.pokemon.databinding.FragmentOverviewBinding
+import com.example.pokemon.databinding.ItemOverviewBinding
 
 class OverviewFragment : Fragment() {
     private val viewModel: OverviewViewModel by lazy {
@@ -20,6 +21,7 @@ class OverviewFragment : Fragment() {
 
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
+        binding.overviewGrid.adapter = OverviewAdapter()
 
         setHasOptionsMenu(true)
         return binding.root
