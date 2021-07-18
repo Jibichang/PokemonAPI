@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.pokemon.detail.DetailViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        tools:context=".detail.DetailFragment">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#00BCD4"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="170dp"
+                    android:layout_height="170dp"
+                    app:imageUrl="@{viewModel.detailProperty.sprites.other.officialArtwork.frontDefault}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{viewModel.detailProperty.name}"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView"
+                    app:layout_constraintStart_toStartOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    tools:text="TextView" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@{String.valueOf(viewModel.detailProperty.pokemonId)}"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="id" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Run the app and select a property to see its details. Now you can see how much it costs, and if it's for sale or rent, to help you better decide whether a permanent move to Mars is in your future...  If you get stuck, go back and watch the video again. Once you’re done, you can check your solution against the solution we’ve provided herRun the app and select a property to see its details. Now you can see how much it costs, and if it's for sale or rent, to help you better decide whether a permanent move to Mars is in your future...  If you get stuck, go back and watch the video again. Once you’re done, you can check your solution against the solution we’ve provided herRun the app and select a property to see its details. Now you can see how much it costs, and if it's for sale or rent, to help you better decide whether a permanent move to Mars is in your future...  If you get stuck, go back and watch the video again. Once you’re done, you can check your solution against the solution we’ve provided herRun the app and select a property to see its details. Now you can see how much it costs, and if it's for sale or rent, to help you better decide whether a permanent move to Mars is in your future...  If you get stuck, go back and watch the video again. Once you’re done, you can check your solution against the solution we’ve provided herRun the app and select a property to see its details. Now you can see how much it costs, and if it's for sale or rent, to help you better decide whether a permanent move to Mars is in your future...  If you get stuck, go back and watch the video again. Once you’re done, you can check your solution against the solution we’ve provided herRun the app and select a property to see its details. Now you can see how much it costs, and if it's for sale or rent, to help you better decide whether a permanent move to Mars is in your future...  If you get stuck, go back and watch the video again. Once you’re done, you can check your solution against the solution we’ve provided herRun the app and select a property to see its details. Now you can see how much it costs, and if it's for sale or rent, to help you better decide whether a permanent move to Mars is in your future...  If you get stuck, go back and watch the video again. Once you’re done, you can check your solution against the solution we’ve provided herRun the app and select a property to see its details. Now you can see how much it costs, and if it's for sale or rent, to help you better decide whether a permanent move to Mars is in your future...  If you get stuck, go back and watch the video again. Once you’re done, you can check your solution against the solution we’ve provided her"
+                        android:textSize="24sp" />
+                </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+</layout>

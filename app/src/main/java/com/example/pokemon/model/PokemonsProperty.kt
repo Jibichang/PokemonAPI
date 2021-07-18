@@ -1,5 +1,6 @@
 package com.example.pokemon.model
-import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 
 data class PokemonsProperty(
  val next: String?,

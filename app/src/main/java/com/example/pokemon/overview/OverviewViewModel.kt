@@ -40,6 +40,10 @@ class OverviewViewModel : ViewModel() {
     val properties: LiveData<List<PokemonProperty>>
         get() = _properties
 
+    private val _navigateToSelectedProperty = MutableLiveData<PokemonProperty>()
+    val navigateToSelectedProperty: LiveData<PokemonProperty>
+        get() = _navigateToSelectedProperty
+
     init {
         getPokemonProperties()
     }
@@ -61,6 +65,13 @@ class OverviewViewModel : ViewModel() {
                 _properties.value = ArrayList()
             }
         }
+    }
+    fun displayPropertyDetails(pokemonProperty: PokemonProperty) {
+        _navigateToSelectedProperty.value = pokemonProperty
+    }
+
+    fun displayPropertyDetailsComplete() {
+        _navigateToSelectedProperty.value = null
     }
 
     override fun onCleared() {

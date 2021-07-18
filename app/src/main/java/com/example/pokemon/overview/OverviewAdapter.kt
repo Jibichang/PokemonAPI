@@ -8,14 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemon.databinding.ItemOverviewBinding
 import com.example.pokemon.model.PokemonProperty
 
-class OverviewAdapter : ListAdapter<PokemonProperty, OverviewAdapter.PokemonPropertyViewHolder>(DiffCallback) {
+class OverviewAdapter(val onClickListener: OnClickListener) : ListAdapter<PokemonProperty, OverviewAdapter.PokemonPropertyViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonPropertyViewHolder {
         return PokemonPropertyViewHolder(ItemOverviewBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: PokemonPropertyViewHolder, position: Int) {
-        val marsProperty = getItem(position)
-        holder.bind(marsProperty)
+        val item = getItem(position)
+        holder.bind(item)
+
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(item)
+        }
     }
 
     class PokemonPropertyViewHolder(private var binding: ItemOverviewBinding) :
@@ -37,6 +41,10 @@ class OverviewAdapter : ListAdapter<PokemonProperty, OverviewAdapter.PokemonProp
         ): Boolean {
             return oldItem.pokemonId == newItem.pokemonId
         }
+    }
+
+    class OnClickListener(val clickListener: (pokemonProperty: PokemonProperty) -> Unit) {
+        fun onClick(pokemonProperty:PokemonProperty) = clickListener(pokemonProperty)
     }
 
 }

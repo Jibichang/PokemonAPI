@@ -1,10 +1,15 @@
 package com.example.pokemon.model
 
-class PokemonProperty(
-    val name: String,
-    val url: String
-) {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-    val pokemonId: Int = url.substring(url.lastIndexOf("/", url.length - 2) + 1, url.lastIndexOf("/", url.length)).toInt()
-    val imageUrl: String ="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/$pokemonId.png"
+@Parcelize
+data class PokemonProperty(
+    val name: String,
+    val url: String,
+): Parcelable {
+    val pokemonId: Int
+        get() = url.substring(url.lastIndexOf("/", url.length - 2) + 1, url.lastIndexOf("/", url.length)).toInt()
+    val imageUrl: String
+        get() ="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/$pokemonId.png"
 }

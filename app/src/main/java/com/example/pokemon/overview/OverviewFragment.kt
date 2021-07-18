@@ -3,9 +3,10 @@ package com.example.pokemon.overview
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.pokemon.databinding.FragmentOverviewBinding
-import com.example.pokemon.databinding.ItemOverviewBinding
 
 class OverviewFragment : Fragment() {
     private val viewModel: OverviewViewModel by lazy {
@@ -16,12 +17,19 @@ class OverviewFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding = FragmentOverviewBinding.inflate(inflater)
 
-        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
 
-        // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
-        binding.overviewGrid.adapter = OverviewAdapter()
+        binding.overviewGrid.adapter = OverviewAdapter(OverviewAdapter.OnClickListener {
+            viewModel.displayPropertyDetails(it)
+        })
+
+        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
+            if ( null != it ) {
+                this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(it))
+                viewModel.displayPropertyDetailsComplete()
+            }
+        })
 
         setHasOptionsMenu(true)
         return binding.root
